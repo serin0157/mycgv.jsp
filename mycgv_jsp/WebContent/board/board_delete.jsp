@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<% String bid = request.getParameter("bid");  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +19,8 @@
 	<div class="content">
 		<section class="board">
 			<h1 class="title">게시판</h1>
-			<form name="deleteForm" action="#" method="get">
+			<form name="deleteForm" action="boardDeleteProc.jsp" method="post">
+				<input type="hidden" name="bid" value="<%= bid%>">
 				<table>
 					<tr>
 						<td><img src="http://localhost:9000/mycgv_jsp/images/trash.jpg"></td>
@@ -27,8 +30,8 @@
 					</tr>				
 					<tr>
 						<td colspan="2">
-							<button type="button" class="btn_style">삭제완료</button>
-							<a href="board_content.jsp">
+							<button type="submit" class="btn_style">삭제완료</button>
+							<a href="board_content.jsp?bid=<%= bid%>">
 								<button type="button" class="btn_style">이전페이지</button></a>
 							<a href="board_list.jsp">
 								<button type="button" class="btn_style">리스트</button></a>

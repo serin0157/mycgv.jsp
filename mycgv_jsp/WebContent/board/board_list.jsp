@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="com.mycgv_jsp.vo.BoardVo" %>
+<%@page import="com.mycgv_jsp.dao.BoardDao" %>
+<%@page import="java.util.ArrayList" %>
+
+<%
+	BoardDao boardDao = new BoardDao();
+	//게시글 전체 리스트 가져오기
+	ArrayList<BoardVo> list = boardDao.select();
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,76 +42,15 @@
 					<th>작성자</th>
 					<th>작성일자</th>
 				</tr>
+				<% for(BoardVo boardVo : list) {%>
 				<tr>
-					<td>1</td>
-					<td><a href="board_content.jsp">스즈메 문단속 재밌어요~^^</a></td>
-					<td>123</td>
-					<td>hong1234</td>
-					<td>2023-04-10</td>
+					<td><%= boardVo.getRno() %></td>
+					<td><a href="board_content.jsp?bid=<%= boardVo.getBid()%>"><%= boardVo.getBtitle() %></a></td>
+					<td><%= boardVo.getBhits() %></td>
+					<td><%= boardVo.getId() %></td>
+					<td><%= boardVo.getBdate() %></td>
 				</tr>
-				<tr>
-					<td>2</td>
-					<td>스즈메 문단속 재밌어요~^^</td>
-					<td>123</td>
-					<td>hong1234</td>
-					<td>2023-04-10</td>
-				</tr>
-				<tr>
-					<td>3</td>
-					<td>스즈메 문단속 재밌어요~^^</td>
-					<td>123</td>
-					<td>hong1234</td>
-					<td>2023-04-10</td>
-				</tr>
-				<tr>
-					<td>4</td>
-					<td>스즈메 문단속 재밌어요~^^</td>
-					<td>123</td>
-					<td>hong1234</td>
-					<td>2023-04-10</td>
-				</tr>
-				<tr>
-					<td>5</td>
-					<td>스즈메 문단속 재밌어요~^^</td>
-					<td>123</td>
-					<td>hong1234</td>
-					<td>2023-04-10</td>
-				</tr>
-				<tr>
-					<td>6</td>
-					<td>스즈메 문단속 재밌어요~^^</td>
-					<td>123</td>
-					<td>hong1234</td>
-					<td>2023-04-10</td>
-				</tr>
-				<tr>
-					<td>7</td>
-					<td>스즈메 문단속 재밌어요~^^</td>
-					<td>123</td>
-					<td>hong1234</td>
-					<td>2023-04-10</td>
-				</tr>
-				<tr>
-					<td>8</td>
-					<td>스즈메 문단속 재밌어요~^^</td>
-					<td>123</td>
-					<td>hong1234</td>
-					<td>2023-04-10</td>
-				</tr>
-				<tr>
-					<td>9</td>
-					<td>스즈메 문단속 재밌어요~^^</td>
-					<td>123</td>
-					<td>hong1234</td>
-					<td>2023-04-10</td>
-				</tr>
-				<tr>
-					<td>10</td>
-					<td>스즈메 문단속 재밌어요~^^</td>
-					<td>123</td>
-					<td>hong1234</td>
-					<td>2023-04-10</td>
-				</tr>
+				<% } %>
 				<tr>
 					<td colspan="5"><< 1  2  3  4  5 >></td>
 				</tr>

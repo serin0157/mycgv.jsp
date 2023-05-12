@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="com.mycgv_jsp.vo.BoardVo" %>
+<%@page import="com.mycgv_jsp.dao.BoardDao" %>
+
+<%	
+	String bid = request.getParameter("bid");
+	BoardDao boardDao = new BoardDao();
+	//한 줄 데이터 가져오기
+	BoardVo boardVo = boardDao.select(bid);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,31 +29,31 @@
 			<table class="board_content">
 				<tr>
 					<th>제목</th>
-					<td>스즈메 문단속 재밌어요~^^</td>
+					<td><%= boardVo.getBtitle() %></td>
 				</tr>
 				<tr>
 					<th>내용</th>
 					<td>
-						스즈메 문단속 재밌어요~^^<br><br><br>
+						<%= boardVo.getBcontent() %><br><br><br>
 					</td>
 				</tr>
 				<tr>
 					<th>조회수</th>
-					<td>1234</td>
+					<td><%= boardVo.getBhits() %></td>
 				</tr>
 				<tr>
 					<th>작성자</th>
-					<td>hong1234</td>
+					<td><%= boardVo.getId() %></td>
 				</tr>
 				<tr>
 					<th>작성일자</th>
-					<td>2023-04-10</td>
+					<td><%= boardVo.getBdate() %></td>
 				</tr>
 				<tr>
 					<td colspan="2">
-						<a href="board_update.jsp">
+						<a href="board_update.jsp?bid=<%= boardVo.getBid()%>">
 							<button type="button" class="btn_style">수정하기</button></a>
-						<a href="board_delete.jsp">
+						<a href="board_delete.jsp?bid=<%= boardVo.getBid()%>">
 							<button type="button" class="btn_style">삭제하기</button></a>
 						<a href="board_list.jsp">
 							<button type="button" class="btn_style">리스트</button></a>
