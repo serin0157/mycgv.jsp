@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String sid = (String)session.getAttribute("sid");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,16 +15,32 @@
 	<header>
 		<div class="header_menu">
 			<nav class="nav1">
+				<% if(sid == null){ //로그인 하기 전 %>
 				<ul>
 					<li><a href="http://localhost:9000/mycgv_jsp/login/login.jsp" target="_parent">로그인</a></li>
 					<li><a href="http://localhost:9000/mycgv_jsp/join/join.jsp" target="_parent">회원가입</a></li>
+					<!-- <li><a href="http://localhost:9000/mycgv_jsp/mypage/mypage.jsp" target="_parent">마이페이지</a></li> -->
+					<li><a href="#">VIP</a></li>
+					<li><a href="#">고객센터</a></li>
+					<li><a href="http://localhost:9000/mycgv_jsp/notice/notice_list.jsp" target="_parent">공지사항</a></li>
+					<li><a href="http://localhost:9000/mycgv_jsp/board/board_list.jsp" target="_parent">게시판</a></li>
+					<!-- <li><a href="http://localhost:9000/mycgv_jsp/admin/admin_index.jsp" target="_parent">ADMIN</a></li> -->
+				</ul>
+				<%}else{ %>
+				<ul>
+					<li><%=sid %>님 반갑습니다</li>
+					<li><a href="http://localhost:9000/mycgv_jsp/login/logout.jsp" target="_parent">로그아웃</a></li>
+					<!-- <li><a href="http://localhost:9000/mycgv_jsp/join/join.jsp" target="_parent">회원가입</a></li> -->
 					<li><a href="http://localhost:9000/mycgv_jsp/mypage/mypage.jsp" target="_parent">마이페이지</a></li>
 					<li><a href="#">VIP</a></li>
 					<li><a href="#">고객센터</a></li>
 					<li><a href="http://localhost:9000/mycgv_jsp/notice/notice_list.jsp" target="_parent">공지사항</a></li>
 					<li><a href="http://localhost:9000/mycgv_jsp/board/board_list.jsp" target="_parent">게시판</a></li>
+					<%if(sid.equals("admin")) {%>
 					<li><a href="http://localhost:9000/mycgv_jsp/admin/admin_index.jsp" target="_parent">ADMIN</a></li>
+					<%} %>
 				</ul>
+				<%} %>
 			</nav>
 			<div>
 				<a href="http://localhost:9000/mycgv_jsp/index.jsp" target="_parent">

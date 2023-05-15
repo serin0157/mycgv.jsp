@@ -10,6 +10,9 @@
 	MemberDao memberDao = new MemberDao();
 	int result = memberDao.loginCheck(memberVo);
 	if(result == 1){
+		//세션 객체 id를 저장 ==> sid(name) = test(value)
+		session.setAttribute("sid", memberVo.getId());
+		
 		out.write("<script>");
 		out.write("alert('로그인에 성공하셨습니다');");
 		out.write("location.href='http://localhost:9000/mycgv_jsp/index.jsp';");

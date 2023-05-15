@@ -1,8 +1,37 @@
 package com.mycgv_jsp.dao;
 
+import java.util.ArrayList;
+
 import com.mycgv_jsp.vo.MemberVo;
 
 public class MemberDao extends DBConn{
+	
+	public ArrayList<MemberVo> select(){
+		ArrayList<MemberVo> list = new ArrayList<MemberVo>();
+		
+		String sql = " SELECT ROWNUM RNO, ID , NAME, TO_CHAR(MDATE, 'YYYY-MM-DD') MDATE, GRADE" + 
+					"  FROM (SELECT ID , NAME, MDATE, GRADE FROM MYCGV_MEMBER ORDER BY MDATE DESC)";
+		getPreparedStatement(sql);
+		
+		try {
+			 rs = pstmt.executeQuery();
+			 
+			 while(rs.next()) {
+				 MemberVo memberVo = new MemberVo();
+				 memberVo.setRno(rs.getInt(1));
+				 memberVo.setId(rs.getString(2));
+				 memberVo.setName(rs.getString(3));
+				 memberVo.setMdate(rs.getString(4));
+				 memberVo.setGrade(rs.getString(5));
+				 
+				 list.add(memberVo); //콘솔창 에러X 화면 출력 X
+			 }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 	
 	/**
 	 * loginCheck - 아이디 중복 체크
@@ -58,8 +87,8 @@ public class MemberDao extends DBConn{
 		int result = 0;
 		
 		String sql=" insert into mycgv_member"
-					+" (id, pass, name, gender, email, addr, tel, pnumber, hobbylist, intro, mdate)"
-					+" values(?,?,?,?,?,?,?,?,?,?,sysdate)";
+					+" (id, pass, name, gender, email, addr, tel, pnumber, hobbylist, intro, mdate, grade)"
+					+" values(?,?,?,?,?,?,?,?,?,?,sysdate, 'GOLD')";
 		getPreparedStatement(sql);
 		
 		try {

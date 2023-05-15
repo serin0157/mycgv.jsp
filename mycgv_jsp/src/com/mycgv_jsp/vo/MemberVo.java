@@ -18,8 +18,15 @@ public class MemberVo {
 	
 	//member 테이블 컬럼 매핑
 	int rno;
-	String email, addr, pnumber, hobbyList, mdate;
+	String email, addr, pnumber, hobbyList, mdate, grade;
 	
+	
+	public String getGrade() {
+		return grade;
+	}
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
 	public String getId() {
 		return id;
 	}
